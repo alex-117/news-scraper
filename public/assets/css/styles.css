@@ -1,0 +1,109 @@
+html,
+body {
+    font-family: 'Saira Extra Condensed', sans-serif;
+}
+
+/*============================*/
+/*=======HEADER SECTION=======*/
+/*============================*/
+
+header {
+    height: 650px;
+    margin-bottom: 25px;
+}
+
+nav {
+    background-color: rgb(1, 7, 19);
+    position: fixed;
+    z-index: 1;
+    height: 10%;
+}
+
+.brand-logo,
+.csgo-icon {
+    height: 100%;
+}
+
+.image-header {
+    background:
+        linear-gradient(215deg, 
+        rgba(0, 0, 0, .3), 
+        rgba(0, 0, 0, .3)),
+        url(../imgs/csgo2-header.jpg) no-repeat;
+    background-size: cover;
+    height: 90%;
+    margin: 0 auto;
+    position: relative;
+    top: 10%;
+    z-index: -1;
+}
+
+/*============================*/
+/*=======MAIN SECTION=========*/
+/*============================*/
+
+.blog-header {
+    margin-bottom: 49px;
+    text-align: center;
+}
+
+.container .row {
+    margin-right: 0px;    
+    margin-left: 0px;    
+}
+
+.card .card-image span.card-title {
+    color: #000;
+}
+
+span.card-title {
+    text-decoration: underline;
+}
+
+.card {
+    margin-top: 49px;
+    height: 400px;
+}
+
+.card-image {
+    height: 200px;
+}
+
+.card-image img {
+    height: 100%;
+}
+
+.card div.card-action {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.card .card-content {
+    height: 160px;
+    padding: 15px;
+    overflow: hidden;
+}
+
+
+
+/*FOOTER */
+
+.page-footer {
+    background-color: rgb(1, 7, 19);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

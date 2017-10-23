@@ -1,0 +1,100 @@
+
+<body>
+    <header>
+        <nav role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="#" class="brand-logo">
+                    <img class="csgo-icon" src="assets/imgs/csgo-icon.png" alt="CSGO icon">
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Log In</a></li>
+                    <li><a href="#">Sign Up</a></li>
+                    <li><a href="#">Log Out</a></li>
+                </ul>
+
+                <ul id="nav-mobile" class="side-nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Log In</a></li>
+                    <li><a href="#">Log In</a></li>
+                    <li><a href="#">Log Out</a></li>
+                </ul>
+                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+        <div class="image-header"></div>
+    </header>
+
+
+    <div class="container">
+        <div class="section main">
+
+            <div class="row blog-header">
+                <h2>Blog</h2> 
+                <hr>
+            </div>
+
+
+            <div class="row">
+                {{#each Card}}
+                <div class="col s12 m4">
+                    <div class="card">
+                        <div class="card-image">
+                           {{#if this.image}}
+                            <img src={{this.image}}>
+                            {{else}}
+                            <img src="assets/imgs/default-card-image.jpg" alt="default">
+                            {{/if}}
+                        </div>
+                        <div class="card-content">
+                            <span class="card-title">{{this.title}}</span>
+                            <h6>{{this.date}}</h6>
+                            <p>I am a very simple card. I am good at containing small bits of information.
+                                I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+        </div>
+        <br><br>
+    </div>
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Company Bio</h5>
+                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Settings</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+            </div>
+        </div>
+    </footer>
