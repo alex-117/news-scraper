@@ -39,6 +39,11 @@ nav {
     z-index: -1;
 }
 
+.user-btn {
+    width: 100%;
+    text-align: center;
+}
+
 /*============================*/
 /*=======MAIN SECTION=========*/
 /*============================*/
@@ -63,7 +68,7 @@ span.card-title {
 
 .card {
     margin-top: 49px;
-    height: 400px;
+    height: 415px;
 }
 
 .card-image {
