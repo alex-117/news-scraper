@@ -19,6 +19,14 @@ var CardSchema = new Schema({
     date: {
         type: String,
         required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    link: {
+        type: String,
+        requied: true
     }
 });
 

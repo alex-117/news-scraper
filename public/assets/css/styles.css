@@ -86,6 +86,19 @@ span.card-title {
 
 
 
+/*BLOG MODALS*/
+
+.blog-modal-image img {
+    width: 100%;
+}
+
+.blog-modal-text p {
+    font-size: 22px;
+    word-spacing: 1px;
+}
+
+
+
 /*FOOTER */
 
 .page-footer {

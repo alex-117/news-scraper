@@ -1,5 +1,6 @@
-// Dependency
+// Dependencies
 var mongoose = require("mongoose");
+var passportLocalMongoose = require("passport-local-mongoose");
 
 // Create the Schema class
 var Schema = mongoose.Schema;
@@ -7,25 +8,11 @@ var Schema = mongoose.Schema;
 // Instantiate a userSchema object with the Schema class we just made
 var UserSchema = new Schema({
     
-    username: {
-        type: String,
-        unique: true,
-        required: "Username is required"
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        match: [/.+\@.+\..+/, "Please enter a valid e-mail address"]
-    },
-    userCreated: {
-        type: Date,
-        default: Date.now
-    }
+    username: { type: String},
+    password: { type: String}
 });
+
+UserSchema.plugin(passportLocalMongoose);
 
 var User = mongoose.model("User", UserSchema);
 

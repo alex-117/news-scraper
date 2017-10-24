@@ -32,12 +32,16 @@ module.exports = function(app) {
             var image = $(element).children("p").children("a").children("img").attr("src");
             
             var date = $(element).children(".post_date").text();
-            console.log("IMAGE", image);
+            
+            var description = $(element).children("p").text();
+            var link = $(element).children("h2").children("a").attr("href");
             // Save these results in an object that we'll push into the results array we defined earlier
             results.push({
                 title: title,
                 image: image,
-                date: date
+                date: date,
+                description: description,
+                link: link
             });
         });
 
@@ -48,7 +52,9 @@ module.exports = function(app) {
             var article = new Card({
                 title: results[i].title,
                 image: results[i].image,
-                date: results[i].date
+                date: results[i].date,
+                description: results[i].description,
+                link: results[i].link
             });
 
             // Using the save method in mongoose, we create our example user in the db

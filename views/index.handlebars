@@ -7,17 +7,36 @@
                     <img class="csgo-icon" src="assets/imgs/csgo-icon.png" alt="CSGO icon">
                 </a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Log In</a></li>
-                    <li><a href="#">Sign Up</a></li>
-                    <li><a href="#">Log Out</a></li>
+
+                    <li><a href="/">Home</a></li>
+
+                    {{#if currentUser}}
+
+                    <li><a href="/logout">Log Out</a></li>
+
+                    {{else}}
+
+
+                    <li><a class="modal-trigger" href="#logIn">Log In</a></li>
+                    <li><a class="modal-trigger" href="#signUp">Sign Up</a></li>
+
+                    {{/if}}
                 </ul>
 
                 <ul id="nav-mobile" class="side-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Log In</a></li>
-                    <li><a href="#">Log In</a></li>
-                    <li><a href="#">Log Out</a></li>
+
+                    <li><a href="/">Home</a></li>
+
+                    {{#if currentUser}}
+
+                    <li><a href="/logout">Log Out</a></li>
+
+                    {{else}}
+
+                    <li><a class="modal-trigger" href="#logIn">Log In</a></li>
+                    <li><a class="modal-trigger" href="#signUp">Sign Up</a></li>
+
+                    {{/if}}
                 </ul>
                 <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
             </div>
@@ -37,10 +56,10 @@
 
             <div class="row">
                 {{#each Card}}
-                <div class="col s12 m4">
+                <div class="col s12 m6 l4">
                     <div class="card">
                         <div class="card-image">
-                           {{#if this.image}}
+                            {{#if this.image}}
                             <img src={{this.image}}>
                             {{else}}
                             <img src="assets/imgs/default-card-image.jpg" alt="default">
@@ -48,19 +67,48 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title">{{this.title}}</span>
-                            <h6>{{this.date}}</h6>
-                            <p>I am a very simple card. I am good at containing small bits of information.
-                                I am convenient because I require little markup to use effectively.</p>
+                            <p>{{this.description}}</p>
                         </div>
                         <div class="card-action">
-                            <a href="#">This is a link</a>
+                            <!-- Modal Trigger -->
+                            <a class="modal-trigger" href="#{{this.id}}">Read More</a>
                         </div>
                     </div>
                 </div>
+
+                <!--====================================-->
+                <!-- Modal Structure -->
+                <div class="modal" id={{this.id}}>
+                    <div class="modal-content">
+                        <div class="blog-modal-image">
+                            {{#if this.image}}
+                            <img src={{this.image}}>
+                            {{else}}
+                            <img src="assets/imgs/default-card-image.jpg" alt="default">
+                            {{/if}}
+                        </div>
+                        <div class="blog-modal-text">
+                            <h3>{{this.title}}</h3>
+                            <hr>
+                            <p>{{this.description}}</p>
+                        </div>
+                        
+                        <hr>
+                        
+                        <div class="blog-modal-comments">
+                            <h4>Comments:</h4>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href={{this.link}}>See Full Article</a>
+                    </div>
+                </div>
+                <!--====================================-->
                 {{/each}}
+            </div>
+            <br><br>
         </div>
-        <br><br>
-    </div>
     </div>
 
     <footer class="page-footer">
@@ -98,3 +146,62 @@
             </div>
         </div>
     </footer>
+
+
+
+    <!-- Log In Modal Structure -->
+    <div id="logIn" class="modal">
+        <div class="modal-content">
+            <h4 class="modal-header">Log in</h4>
+            <div class="row">
+                <form class="col s12" method="POST" action="/login">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="icon_prefix" type="text" name="username" class="validate">
+                            <label for="icon_prefix">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">phone</i>
+                            <input id="icon_telephone" type="password" name="password" class="validate">
+                            <label for="icon_telephone">Password</label>
+                        </div>
+                    </div>
+
+                    <input class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal Structure -->
+    <div id="signUp" class="modal">
+        <div class="modal-content">
+            <h4 class="modal-header">Sign Up</h4>
+            <div class="row">
+                <form class="col s12" method="POST" action="/signup">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="icon_prefix" type="text" name="username" class="validate">
+                            <label for="icon_prefix">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">phone</i>
+                            <input id="icon_telephone" type="password" name="password" class="validate">
+                            <label for="icon_telephone">Password</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <input class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+

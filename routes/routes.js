@@ -3,10 +3,45 @@ var request = require("request");
 var cheerio = require("cheerio");
 var mongoose = require("mongoose");
 
-module.exports = function(app) {
+module.exports = function(app, passport) {
 
     // Routes
     // ======
+
+
+
+
+    //PASSPORT ROUTES
+    app.post("/signup", function(req, res) {
+        User.register(new User({username: req.body.username}), req.body.password, function(err, user) {
+            if(err) {
+                console.log(err);
+                return res.render("index");
+            }
+            passport.authenticate("local")(req, res, function() {
+                res.redirect("/");
+            })
+        })
+    });
+
+    // Sign in routes
+    app.get("/login", function(req, res) {
+        res.render("index");
+    });
+
+    app.post("/login", passport.authenticate("local", {
+        successRedirect: "/",
+
+        failureRedirect: "/"
+    }));
+
+
+    // logout route
+    app.get("/logout", function(req, res) {
+        req.logout();
+        res.redirect("/");
+    });
+    //END PASSPORT ROUTES
 
     // Route to post our form submission to mongoDB via mongoose
     app.post("/submit", function(req, res) {
@@ -23,7 +58,6 @@ module.exports = function(app) {
             }
             // Otherwise, send the new doc to the browser
             else {
-                console.log("DOC", doc);
                 res.send(doc);
             }
         });
@@ -37,7 +71,7 @@ module.exports = function(app) {
             res.render("index", {Card: dbCard});
         });  
     });
-    
+
     app.get("/users", function(req, res) {
         mongoose.model("User").find(function(err, users) {
             if(err) {
