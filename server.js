@@ -12,7 +12,9 @@ var express               = require("express"),
     LocalStrategy         = require("passport-local"),
     passportLocalMongoose = require("passport-local-mongoose"),
     User                  = require("./models/user.js"),
-    Card                  = require("./models/card.js");;
+    Card                  = require("./models/card.js"),
+    Comment               = require("./models/comment.js"),
+    methodOverride        = require("method-override");
 
 // initialize Express
 var app = express();
@@ -23,13 +25,28 @@ mongoose.Promise = global.Promise;
 // Static file support with public folder
 app.use(express.static("public"));
 
+// Setup Handlebars
+var hbs = exphbs.create({
+    helpers: {
+        if_equal: function(x, y, opts) {
+            if(x == y) {
+                return opts.fn(this)
+            } else {
+                return opts.inverse(this)
+            }
+        }
+    },
+    defaultLayout: "main"
+})
+
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 
 // Setup Body-Parser
 app.use(bodyParser.urlencoded({extended: true}));
-// Setup Handlebars
-app.engine("handlebars", exphbs({defaultLayout: "main"}));
-app.set("view engine", "handlebars");
 
+// Allows all CRUD options
+app.use(methodOverride("_method"));
 
 // Setup Passport 
 app.use(require("express-session")({

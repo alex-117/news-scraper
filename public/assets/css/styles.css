@@ -1,6 +1,7 @@
 html,
 body {
     font-family: 'Saira Extra Condensed', sans-serif;
+    font-size: 20px;
 }
 
 /*============================*/
@@ -97,7 +98,16 @@ span.card-title {
     word-spacing: 1px;
 }
 
+.hide {
+    display: none;
+}
 
+.user-comment-author {
+    text-decoration: underline;
+}
+.user-comment-text {
+    
+}
 
 /*FOOTER */
 

@@ -8,8 +8,8 @@ var Schema = mongoose.Schema;
 // Instantiate a userSchema object with the Schema class we just made
 var UserSchema = new Schema({
     
-    username: { type: String},
-    password: { type: String}
+    username: {type: String},
+    password: {type: String}
 });
 
 UserSchema.plugin(passportLocalMongoose);

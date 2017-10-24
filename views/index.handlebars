@@ -1,207 +1,148 @@
+<div class="container">
+    <div class="section main">
 
-<body>
-    <header>
-        <nav role="navigation">
-            <div class="nav-wrapper container">
-                <a id="logo-container" href="#" class="brand-logo">
-                    <img class="csgo-icon" src="assets/imgs/csgo-icon.png" alt="CSGO icon">
-                </a>
-                <ul class="right hide-on-med-and-down">
-
-                    <li><a href="/">Home</a></li>
-
-                    {{#if currentUser}}
-
-                    <li><a href="/logout">Log Out</a></li>
-
-                    {{else}}
+        <div class="row blog-header">
+            <h2>Blog</h2> 
+            <hr>
+        </div>
 
 
-                    <li><a class="modal-trigger" href="#logIn">Log In</a></li>
-                    <li><a class="modal-trigger" href="#signUp">Sign Up</a></li>
-
-                    {{/if}}
-                </ul>
-
-                <ul id="nav-mobile" class="side-nav">
-
-                    <li><a href="/">Home</a></li>
-
-                    {{#if currentUser}}
-
-                    <li><a href="/logout">Log Out</a></li>
-
-                    {{else}}
-
-                    <li><a class="modal-trigger" href="#logIn">Log In</a></li>
-                    <li><a class="modal-trigger" href="#signUp">Sign Up</a></li>
-
-                    {{/if}}
-                </ul>
-                <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-            </div>
-        </nav>
-        <div class="image-header"></div>
-    </header>
-
-
-    <div class="container">
-        <div class="section main">
-
-            <div class="row blog-header">
-                <h2>Blog</h2> 
-                <hr>
-            </div>
-
-
-            <div class="row">
-                {{#each Card}}
-                <div class="col s12 m6 l4">
-                    <div class="card">
-                        <div class="card-image">
-                            {{#if this.image}}
-                            <img src={{this.image}}>
-                            {{else}}
-                            <img src="assets/imgs/default-card-image.jpg" alt="default">
-                            {{/if}}
-                        </div>
-                        <div class="card-content">
-                            <span class="card-title">{{this.title}}</span>
-                            <p>{{this.description}}</p>
-                        </div>
-                        <div class="card-action">
-                            <!-- Modal Trigger -->
-                            <a class="modal-trigger" href="#{{this.id}}">Read More</a>
-                        </div>
+        <div class="row">
+            {{#each Card}}
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-image">
+                        {{#if this.image}}
+                        <img src={{this.image}}>
+                        {{else}}
+                        <img src="assets/imgs/default-card-image.jpg" alt="default">
+                        {{/if}}
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title">{{this.title}}</span>
+                        <p>{{this.description}}</p>
+                    </div>
+                    <div class="card-action">
+                        <!-- Modal Trigger -->
+                        <a class="modal-trigger" href="#{{this.id}}">Read More</a>
                     </div>
                 </div>
+            </div>
 
-                <!--====================================-->
-                <!-- Modal Structure -->
-                <div class="modal" id={{this.id}}>
-                    <div class="modal-content">
-                        <div class="blog-modal-image">
-                            {{#if this.image}}
-                            <img src={{this.image}}>
-                            {{else}}
-                            <img src="assets/imgs/default-card-image.jpg" alt="default">
-                            {{/if}}
-                        </div>
-                        <div class="blog-modal-text">
-                            <h3>{{this.title}}</h3>
-                            <hr>
-                            <p>{{this.description}}</p>
-                        </div>
-                        
+            <!--====================================-->
+            <!-- Modal Structure -->
+            <div class="modal" id={{this.id}}>
+                <div class="modal-content">
+                    <div class="blog-modal-image">
+                        {{#if this.image}}
+                        <img src={{this.image}}>
+                        {{else}}
+                        <img src="assets/imgs/default-card-image.jpg" alt="default">
+                        {{/if}}
+                    </div>
+                    <div class="blog-modal-text">
+                        <h3>{{this.title}}</h3>
                         <hr>
-                        
-                        <div class="blog-modal-comments">
-                            <h4>Comments:</h4>
+                        <p>{{this.description}}</p>
+                    </div>
+
+                    <hr>
+
+                    <div class="blog-modal-comments">
+                        <h4>Comments:</h4>
+                        {{#each ../Comment}}
+                        {{#if_equal this.articleId ../this.id}}
+                        <div class="user-comment">
+                            <h6 class="user-comment-author">{{this.author}}</h6>
+                            <p class="user-comment-text">{{this.text}}</p>
                             
+                            {{#if_equal this.author ../../currentUser.username}}
+                            <form action="/comment/{{this.id}}?_method=DELETE" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+                            {{/if_equal}}
+                            <hr>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href={{this.link}}>See Full Article</a>
+                        {{/if_equal}}
+                        {{/each}}
+
+                        {{#if ../currentUser}}
+                        <form action="/comment" method="POST">
+                            <input type="textarea" name="text">
+                            <input class="hide" type="text" name="author" value="{{../currentUser.username}}">
+                            <input class="hide" type="text" name="articleId" value="{{this.id}}">
+                            <input type="submit">
+                        </form>
+                        {{/if}}
                     </div>
                 </div>
-                <!--====================================-->
-                {{/each}}
+                <div class="modal-footer">
+                    <a href={{this.link}}>See Full Article</a>
+                </div>
             </div>
-            <br><br>
+            <!--====================================-->
+            {{/each}}
         </div>
+        <br><br>
     </div>
 
-    <footer class="page-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Company Bio</h5>
-                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+</div>
 
 
-                </div>
-                <div class="col l3 s12">
-                    <h5 class="white-text">Settings</h5>
-                    <ul>
-                        <li><a class="white-text" href="#!">Link 1</a></li>
-                        <li><a class="white-text" href="#!">Link 2</a></li>
-                        <li><a class="white-text" href="#!">Link 3</a></li>
-                        <li><a class="white-text" href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-                <div class="col l3 s12">
-                    <h5 class="white-text">Connect</h5>
-                    <ul>
-                        <li><a class="white-text" href="#!">Link 1</a></li>
-                        <li><a class="white-text" href="#!">Link 2</a></li>
-                        <li><a class="white-text" href="#!">Link 3</a></li>
-                        <li><a class="white-text" href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-            </div>
-        </div>
-    </footer>
-
-
-
-    <!-- Log In Modal Structure -->
-    <div id="logIn" class="modal">
-        <div class="modal-content">
-            <h4 class="modal-header">Log in</h4>
-            <div class="row">
-                <form class="col s12" method="POST" action="/login">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input id="icon_prefix" type="text" name="username" class="validate">
-                            <label for="icon_prefix">Username</label>
-                        </div>
+<!-- Log In Modal Structure -->
+<div id="logIn" class="modal">
+    <div class="modal-content">
+        <h4 class="modal-header">Log in</h4>
+        <div class="row">
+            <form class="col s12" method="POST" action="/login">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="icon_prefix" type="text" name="username" class="validate">
+                        <label for="icon_prefix">Username</label>
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">phone</i>
-                            <input id="icon_telephone" type="password" name="password" class="validate">
-                            <label for="icon_telephone">Password</label>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="icon_telephone" type="password" name="password" class="validate">
+                        <label for="icon_telephone">Password</label>
                     </div>
+                </div>
 
+                <input class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Sign Up Modal Structure -->
+<div id="signUp" class="modal">
+    <div class="modal-content">
+        <h4 class="modal-header">Sign Up</h4>
+        <div class="row">
+            <form class="col s12" method="POST" action="/signup">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="icon_prefix" type="text" name="username" class="validate">
+                        <label for="icon_prefix">Username</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="icon_telephone" type="password" name="password" class="validate">
+                        <label for="icon_telephone">Password</label>
+                    </div>
+                </div>
+
+                <div class="row">
                     <input class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
-
-    <!-- Sign Up Modal Structure -->
-    <div id="signUp" class="modal">
-        <div class="modal-content">
-            <h4 class="modal-header">Sign Up</h4>
-            <div class="row">
-                <form class="col s12" method="POST" action="/signup">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">account_circle</i>
-                            <input id="icon_prefix" type="text" name="username" class="validate">
-                            <label for="icon_prefix">Username</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <i class="material-icons prefix">phone</i>
-                            <input id="icon_telephone" type="password" name="password" class="validate">
-                            <label for="icon_telephone">Password</label>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <input class="modal-action modal-close waves-effect waves-green btn-flat" type="submit">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+</div>
 
