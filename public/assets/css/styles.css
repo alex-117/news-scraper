@@ -9,7 +9,7 @@ body {
 /*============================*/
 
 header {
-    height: 650px;
+    height: 400px;
     margin-bottom: 25px;
 }
 
@@ -128,6 +128,10 @@ span.card-title {
 
 
 @media only screen and (max-width: 500px) {
+    header {
+        height: 400px;
+    }
+    
     .image-header {
         background:
             linear-gradient(215deg, 
@@ -135,7 +139,7 @@ span.card-title {
                 rgba(0, 0, 0, .3)),
             url(../imgs/mobile-header.jpg) no-repeat center center;
         background-size: cover;
-        height: 50%;
+        height: 100%;
         margin: 0 auto;
         position: relative;
         top: 10%;
