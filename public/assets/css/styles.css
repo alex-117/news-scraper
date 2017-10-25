@@ -28,8 +28,8 @@ nav {
 .image-header {
     background:
         linear-gradient(215deg, 
-        rgba(0, 0, 0, .3), 
-        rgba(0, 0, 0, .3)),
+            rgba(0, 0, 0, .3), 
+            rgba(0, 0, 0, .3)),
         url(../imgs/csgo2-header.jpg) no-repeat;
     background-size: cover;
     height: 90%;
@@ -111,7 +111,7 @@ span.card-title {
     text-decoration: underline;
 }
 .user-comment-text {
-    
+
 }
 
 /*FOOTER */
@@ -122,10 +122,26 @@ span.card-title {
 
 
 
+/*============================*/
+/*=======MEDIA QUERIES========*/
+/*============================*/
 
 
-
-
+@media only screen and (max-width: 500px) {
+    .image-header {
+        background:
+            linear-gradient(215deg, 
+                rgba(0, 0, 0, .3), 
+                rgba(0, 0, 0, .3)),
+            url(../imgs/mobile-header.jpg) no-repeat center center;
+        background-size: cover;
+        height: 50%;
+        margin: 0 auto;
+        position: relative;
+        top: 10%;
+        z-index: -1;
+    }
+}
 
 
 
